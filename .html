@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Dark Theme Google Page</title>
+  <style>
+      @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #111, darkcyan); /* Aesthetic dark background */
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "MuseoModerno", sans-serif;
+      color:cyan;
+    }
+
+    .time-display {
+      position: absolute;
+      top: 100px;
+      left: 50px;
+      text-align: left;
+      color: white;
+    }
+
+    .time {
+      font-size: 72px;
+      font-weight: 300;
+      line-height: 0.8em;
+      color:cyan
+    }
+.hours{
+    margin-bottom:5px
+}
+    .hours, .minutes {
+      display: block;
+    }
+
+    .date {
+      font-size: 18px;
+      font-weight: 300;
+      margin-top: 10px;
+      
+    }
+
+    .app-links {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+     background-color: #EEEEF34D;
+     box-shadow: 
+    3px 3px 5px rgba(0, 0, 0, 0.2), /* First layer */
+    6px 6px 10px rgba(0, 0, 0, 0.15), /* Second layer */
+    9px 9px 15px rgba(0, 0, 0, 0.1);  /* Third layer */
+     backdrop-filter: blur(10px);
+     border-radius: 20px;
+     padding:20px 20px 20px 20px;
+    }
+
+    .app-links img {
+      width: 50px;
+      height: 50px;
+      border-radius: 20px;
+      border: 1px solid cyan;
+    }
+
+    .container {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #00ffcc; /* Neon effect */
+      
+    }
+
+    .quote {
+      font-size: 24px;
+      font-weight: 300;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .quote.active {
+      opacity: 1;
+    }
+
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+    form{
+      position: absolute;
+      top:100px;
+      left :170px;
+      margin-top: 10px;
+      
+      input{
+      width:400px;
+      height:40px;
+      padding-left:20px;
+      color:white;
+    }
+    button{
+      background-color: cyan;
+      border: none;
+      height:40px;
+      width:70px;
+      border-radius: 5px;
+      
+    }
+    &:active{
+      border: 2px solid cyan;
+    }
+   
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Time Display -->
+  <div class="time-display">
+    <div class="time">
+      <span class="hours" id="hours"></span>
+      <span class="minutes" id="minutes"></span>
+    </div>
+    <div class="date" id="date"></div>
+  </div>
+  
+<form action="https://www.google.com/search" method="get">
+        <input type="text" name="q" placeholder="Search on Google..." required>
+        <button type="submit">Search</button>
+    </form>
+  <!-- Quote Display -->
+  <div class="container">
+    <div class="quote active" id="quote">"The only way to do great work is to love what you do."</div>
+  </div>
+
+  <!-- App Links -->
+  <div class="app-links">
+    <a href="https://www.google.com" target="_blank">
+      <img src="./google-logo-white-background-vector-format-available-google-logo-124289805.jpg" alt="Google">
+    </a>
+    <a href="https://www.youtube.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/YouTube_social_white_squircle_%282017%29.svg" alt="YouTube">
+    </a>
+    <a href="https://www.github.com" target="_blank">
+      <img style="filter: invert(1);" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+    </a>
+    <a href="https://stackoverflow.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Stack_Overflow_icon.svg" alt="Stack Overflow">
+    </a>
+    <a href="https://www.facebook.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+    </a>
+    <a href="https://chatgpt.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+    </a>
+    <a href="https://linkedin.com" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="LinkedIn">
+    </a>
+  </div>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const day = now.toLocaleString('default', { weekday: 'short' });
+      const month = now.toLocaleString('default', { month: 'short' });
+      const date = now.getDate();
+    
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // If hour is 0, set it to 12
+      const formattedHours = String(hours).padStart(2, '0');
+    
+      document.getElementById('hours').textContent = formattedHours;
+      document.getElementById('minutes').textContent = minutes;
+      
+      document.getElementById('date').textContent = `${month} ${date} - ${day}`;
+    }
+
+    // Change Quotes
+    const quotes = [
+      '"The only way to do great work is to love what you do."',
+      '"Success is not final, failure is not fatal: It is the courage to continue that counts."',
+      '"Don’t watch the clock; do what it does. Keep going."',
+      '"Hard work beats talent when talent doesn’t work hard."',
+      '"The future depends on what you do today."',
+      '"Your limitation—it’s only your imagination."',
+      '"Push yourself, because no one else is going to do it for you."',
+      '"Coding is Love -ahmad"'
+    ];
+
+    let quoteIndex = 0;
+    const quoteElement = document.getElementById('quote');
+
+    function changeQuote() {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      quoteElement.classList.remove('active');
+      setTimeout(() => {
+        quoteElement.textContent = quotes[quoteIndex];
+      quoteElement.classList.add('active');  // Fade in new quote
+    }, 2000);  // 500ms delay before changing the quote
+  }
+
+  // Initial call to update the time and start interval for quotes
+  setInterval(updateTime, 1000);  // Update time every second
+  setInterval(changeQuote, 6000); // Change quote every 5 seconds
+
+  updateTime();  // Initial call to set the time on page load
+  </script>
+  </body>
+  </html>
